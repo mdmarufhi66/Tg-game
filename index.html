@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Miner Dash</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Telegram Mini App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- TON Connect SDK -->
+    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+    <!-- Monetag Ad SDK (Replace with actual Monetag SDK script) -->
+    <script src="https://monetag.com/monetag-sdk.js" async></script>
+</head>
+<body>
+    <!-- Onboarding Screen -->
+    <div id="onboarding" class="screen">
+        <h1>Welcome to Crypto Miner Dash!</h1>
+        <button id="connect-wallet">Connect Wallet</button>
+        <p>Bonus: <span id="welcome-bonus">50 CS</span></p>
+        <button id="double-bonus">Double Bonus (Watch Ad)</button>
+        <button id="start-game">Start Mining</button>
+    </div>
+
+    <!-- Main Game Screen -->
+    <div id="game-screen" class="screen" style="display: none;">
+        <canvas id="game-canvas" width="320" height="480"></canvas>
+        <div id="score">Score: 0</div>
+        <div id="shards">Crypto Shards: 0</div>
+        <button id="boost-speed" style="display: none;">Boost Speed (Ad)</button>
+        <button id="double-shards" style="display: none;">Double Shards (Ad)</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="screen" style="display: none;">
+        <h2>Game Over!</h2>
+        <p>Score: <span id="final-score">0</span></p>
+        <p>Crypto Shards: <span id="final-shards">0</span></p>
+        <button id="restart-game">Restart</button>
+    </div>
+
+    <!-- Missions Tab -->
+    <div id="missions-screen" class="screen" style="display: none;">
+        <h2>Missions</h2>
+        <div id="missions-list"></div>
+    </div>
+
+    <!-- Mine Tab -->
+    <div id="mine-screen" class="screen" style="display: none;">
+        <h2>Tap to Mine</h2>
+        <div id="mining-rig">⛏️ Tap Here!</div>
+        <div id="energy">Energy: 100/100</div>
+        <div id="mine-shards">Crypto Shards: 0</div>
+        <button id="refill-energy">Refill Energy (Ad)</button>
+        <button id="upgrade-energy">Faster Energy Refill (100 CS)</button>
+        <button id="upgrade-shards">More CS per Tap (150 CS)</button>
+    </div>
+
+    <!-- Invite Tab -->
+    <div id="invite-screen" class="screen" style="display: none;">
+        <h2>Invite Friends</h2>
+        <button id="generate-invite">Generate Invite Link</button>
+        <div id="invite-stats">Friends Invited: 0 | CS Earned: 0</div>
+        <button id="claim-invite-bonus" style="display: none;">Claim Bonus (Ad)</button>
+    </div>
+
+    <!-- Profile Tab -->
+    <div id="profile-screen" class="screen" style="display: none;">
+        <h2>Profile</h2>
+        <div id="cs-balance">Crypto Shards: 0</div>
+        <div id="airdrop-status">Airdrop: Watch 10 more ads to qualify!</div>
+        <button id="check-airdrop">Check Airdrop (Ad)</button>
+        <button id="withdraw-cs">Withdraw CS</button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <button onclick="showScreen('game-screen')">Play</button>
+        <button onclick="showScreen('missions-screen')">Missions</button>
+        <button onclick="showScreen('mine-screen')">Mine</button>
+        <button onclick="showScreen('invite-screen')">Invite</button>
+        <button onclick="showScreen('profile-screen')">Profile</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
