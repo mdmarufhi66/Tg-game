@@ -10,8 +10,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     height: 100vh;
+    box-sizing: border-box;
 }
 
 h1, h2 {
@@ -23,17 +24,33 @@ button {
     color: #00FF66;
     border: 2px solid #00FF66;
     border-radius: 10px;
-    padding: 10px 20px;
-    margin: 10px;
+    padding: 8px 16px;
+    margin: 5px;
     cursor: pointer;
 }
 
 #welcome-bonus, #score, #shards, #mine-shards, #cs-balance, #final-score, #final-shards {
     color: #C0C0C0; /* Crypto silver */
+    font-size: 16px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 10px;
 }
 
 #game-canvas {
     border: 2px solid #00FF66;
+    background-color: #2A3B3F; /* Slightly lighter background for canvas */
+}
+
+.ad-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
 
 #mining-rig {
@@ -48,11 +65,19 @@ button {
     background: #1C2526;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 8px 0;
+    border-top: 1px solid #00FF66;
 }
 
 .nav-bar button {
     background: none;
     border: none;
     color: #00FF66;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.nav-bar button.active {
+    color: #C0C0C0;
+    border-bottom: 2px solid #00FF66;
 }
