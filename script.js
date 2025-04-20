@@ -41,7 +41,7 @@ let lastShard = 0;
 let lastBooster = 0;
 let gameTime = 0;
 
-// Load Sprites
+// Load Sprites (Fallback to rectangles if sprites are unavailable)
 const minerSprite = new Image();
 minerSprite.src = 'assets/miner.png';
 const bugSprite = new Image();
@@ -55,6 +55,8 @@ boosterSprite.src = 'assets/booster.png';
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => screen.style.display = 'none');
     document.getElementById(screenId).style.display = 'flex';
+    document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.nav-bar button[onclick="showScreen('${screenId}')"]`).classList.add('active');
     if (screenId === 'game-screen' && !user.gameActive) startGame();
 }
 
@@ -115,7 +117,12 @@ function gameLoop() {
         player.y = 400;
         player.jumping = false;
     }
-    ctx.drawImage(minerSprite, player.x, player.y, player.width, player.height);
+    if (minerSprite.complete) {
+        ctx.drawImage(minerSprite, player.x, player.y, player.width, player.height);
+    } else {
+        ctx.fillStyle = '#00FF66';
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
 
     // Obstacles
     if (Math.random() < 0.02 && canvas.width - lastObstacle > 100) {
@@ -124,7 +131,12 @@ function gameLoop() {
     }
     obstacles.forEach((obstacle, i) => {
         obstacle.x -= user.speedBoost ? 4 : 2;
-        ctx.drawImage(bugSprite, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        if (bugSprite.complete) {
+            ctx.drawImage(bugSprite, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        } else {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        }
         if (obstacle.x < -obstacle.width) obstacles.splice(i, 1);
         if (collision(player, obstacle)) {
             user.gameActive = false;
@@ -141,7 +153,12 @@ function gameLoop() {
     }
     shards.forEach((shard, i) => {
         shard.x -= user.speedBoost ? 4 : 2;
-        ctx.drawImage(shardSprite, shard.x, shard.y, shard.width, shard.height);
+        if (shardSprite.complete) {
+            ctx.drawImage(shardSprite, shard.x, shard.y, shard.width, shard.height);
+        } else {
+            ctx.fillStyle = '#C0C0C0';
+            ctx.fillRect(shard.x, shard.y, shard.width, shard.height);
+        }
         if (collision(player, shard)) {
             user.shards += user.doubleShards ? 2 : 1;
             user.score += user.doubleShards ? 2 : 1;
@@ -156,7 +173,12 @@ function gameLoop() {
     // Ad Boosters
     boosters.forEach((booster, i) => {
         booster.x -= user.speedBoost ? 4 : 2;
-        ctx.drawImage(boosterSprite, booster.x, booster.y, booster.width, booster.height);
+        if (boosterSprite.complete) {
+            ctx.drawImage(boosterSprite, booster.x, booster.y, booster.width, booster.height);
+        } else {
+            ctx.fillStyle = '#00FF66';
+            ctx.fillRect(booster.x, booster.y, booster.width, booster.height);
+        }
         if (collision(player, booster)) {
             user.adBoosterCount++;
             updateAdBoosters();
@@ -367,3 +389,8 @@ const monetag = {
         setTimeout(callback, 2000); // Simulate ad display
     },
 };
+
+// Initialize the app
+document.addEventListener('DOMContentLoaded', () => {
+    showScreen('onboarding');
+});
