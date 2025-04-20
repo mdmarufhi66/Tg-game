@@ -24,11 +24,15 @@
 
     <!-- Main Game Screen -->
     <div id="game-screen" class="screen" style="display: none;">
+        <div class="game-header">
+            <span id="score">Score: 0</span>
+            <span id="shards">Crypto Shards: 0</span>
+        </div>
         <canvas id="game-canvas" width="320" height="480"></canvas>
-        <div id="score">Score: 0</div>
-        <div id="shards">Crypto Shards: 0</div>
-        <button id="boost-speed" style="display: none;">Boost Speed (Ad)</button>
-        <button id="double-shards" style="display: none;">Double Shards (Ad)</button>
+        <div class="ad-buttons">
+            <button id="boost-speed" style="display: none;">Boost Speed (Ad)</button>
+            <button id="double-shards" style="display: none;">Double Shards (Ad)</button>
+        </div>
     </div>
 
     <!-- Game Over Screen -->
